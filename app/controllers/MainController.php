@@ -2,24 +2,22 @@
 
 namespace app\controllers;
 
-class Main extends AppController {
+use app\models\Main;
 
-//    public $layout = 'main';
+class MainController extends AppController
+{
 
     public function indexAction()
     {
-//        echo 111;
-//        $this->layout = false;
-//        $this->layout = 'default';
-//        $this->view = 'test';
-
-        $name = 'AAAAAAAAAAAAAAAndrey';
-        $hi = "Hello";
-        $color = [
-            'white'=>'белый',
-            'black'=>'черный'
-        ];
-        $this->set(compact('name', 'hi', 'color'));
-        //$this->set(['name'=>$name, 'hi'=>'Hello']);
+        $model = new Main();
+//        $res = $model->query("CREATE TABLE posts SELECT * FROM guest_book_db.users");
+        $posts = $model->findAll();
+        $post = $model->findOne('User2');
+        $data1 = $model->findBySql("SELECT * FROM {$model->table} ORDER BY id DESC LIMIT 2");
+        $data2 = $model->findBySql("SELECT * FROM {$model->table} WHERE {$model->pk} LIKE ?",
+                             ['%23%']);
+        debug($data2);
+        $title = 'PAGE TITLE';
+        $this->set(compact('title', 'posts'));
     }
 }

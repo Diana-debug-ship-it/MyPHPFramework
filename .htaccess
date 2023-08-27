@@ -1,0 +1,5 @@
+AddDefaultCharset UTF-8
+RewriteEngine On
+RewriteRule ^(.*)$ /public/$1
+#берет все запросы и отправляет их в паблик
+#т.е. берет ^(.*)$ и помещает в $1, т.е. в паблик
